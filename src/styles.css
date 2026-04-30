@@ -220,15 +220,18 @@ body {
   align-items: center;
   padding: 4px 2px 6px;
 }
+/* Columnas verticales a ambos lados de la cruceta. Cada columna lleva
+   2 botones; con esto se gana ancho útil y las teclas no se solapan
+   con sus etiquetas SHIFT en pantallas pequeñas. */
 .top-side {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
   gap: 7px;
+  align-self: stretch;
 }
-/* En el lado derecho, MODE/SETUP es más ancha que ON: las etiquetas
-   "MODE" y "SETUP" son largas y no caben en 50 px. */
-.top-side.top-right {
-  grid-template-columns: 1.6fr 1fr;
+.top-side .key {
+  flex: 1 1 0;
+  min-height: 50px;
 }
 
 .dpad {
@@ -475,14 +478,24 @@ button.danger:disabled { opacity: 0.5; cursor: not-allowed; }
   .display-line.result { font-size: 22px; }
 }
 
+/* Móvil: full-screen, márgenes mínimos, teclas más altas. */
+@media (max-width: 480px) {
+  .app { padding: 0; }
+  .calc-shell {
+    width: 100vw;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+    padding: 6px 6px 8px;
+    gap: 8px;
+  }
+  .calc-header { padding: 0 2px; }
+  .brand-name  { font-size: 16px; }
+  .brand-model { font-size: 10px; }
+  .chip { padding: 4px 8px; font-size: 10px; }
+}
 @media (max-width: 380px) {
-  .calc-shell { padding: 12px 10px 14px; border-radius: 16px; }
   .key { padding: 10px 2px 6px; }
-  .key-top { font-size: 11px; top: 3px; right: 4px; }
-  .key-main { font-size: 12px; }
-  .key.has-top .key-main { font-size: 11px; bottom: 4px; left: 5px; }
-  .dpad { width: 96px; height: 96px; }
-  .dpad-center { width: 32px; height: 32px; }
   .dpad-center span { font-size: 6.5px; }
 }
 

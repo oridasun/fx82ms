@@ -3,13 +3,14 @@
 // `KEYS` son las filas regulares de funciones, números y operadores (5 columnas cada una).
 
 export const TOP_CONTROLS = {
+  // Columnas verticales a los lados de la cruceta REPLAY.
   left:  [
     { id: 'SHIFT', main: 'SHIFT', className: 'k-shift' },
     { id: 'ALPHA', main: 'ALPHA', className: 'k-alpha' }
   ],
   right: [
-    { id: 'MODE', main: 'MODE', top: 'SETUP', className: 'k-mode' },
-    { id: 'ON',   main: 'ON',   className: 'k-on' }
+    { id: 'SETUP', main: 'SETUP', className: 'k-mode' },
+    { id: 'MODE',  main: 'MODE',  className: 'k-mode' }
   ],
   dpad: {
     up:    { id: 'UP',    label: '▲' },

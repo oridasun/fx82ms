@@ -157,7 +157,7 @@ function handleKey(state, key, history, pushHistory) {
   if (key === 'SHIFT') return { ...s, shift: !s.shift, alpha: false };
   if (key === 'ALPHA') return { ...s, alpha: !s.alpha, shift: false };
   if (key === 'HYP') return { ...s, hyp: !s.hyp };
-  if (key === 'ON')  return clearShifts({ ...initialState, ans: s.ans, M: s.M });
+  if (key === 'SETUP') return clearShifts({ ...s, pendingMenu: 'displayMode' });
 
   // Menú SETUP (SHIFT+MODE) — captura previa al resto del handler.
   if (s.pendingMenu === 'displayMode') {
@@ -249,13 +249,8 @@ function handleKey(state, key, history, pushHistory) {
     return clearShifts({ ...s, formula: before + after, cursor: s.cursor - 1, showResult: false, error: null });
   }
 
-  // MODE
+  // MODE: ciclo COMP / SD (SETUP es ahora una tecla independiente).
   if (key === 'MODE') {
-    if (shifted) {
-      // SHIFT+MODE = SETUP → menú Fix/Sci/Norm.
-      return clearShifts({ ...s, pendingMenu: 'displayMode' });
-    }
-    // ciclo COMP / SD
     const nextMode = s.mode === 'COMP' ? 'SD' : 'COMP';
     return clearShifts({ ...s, mode: nextMode, formula: '', cursor: 0, showResult: false });
   }
