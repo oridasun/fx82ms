@@ -493,10 +493,22 @@ button.danger:disabled { opacity: 0.5; cursor: not-allowed; }
   .brand-name  { font-size: 16px; }
   .brand-model { font-size: 10px; }
   .chip { padding: 4px 8px; font-size: 10px; }
+
+  /* En móvil cada tecla central (1/5 del ancho) es estrecha; reducimos
+     gaps internos y font-size para que main + top no se solapen. */
+  .keypad      { gap: 5px; padding: 6px; }
+  .keypad-row  { gap: 5px; }
+  .key.has-top .key-top  { top: 3px; right: 3px; font-size: 13px; letter-spacing: -0.02em; }
+  .key.has-top .key-main { bottom: 4px; left: 4px; font-size: 13px; }
+  .key.k-num.has-top .key-top  { font-size: 12px; right: 3px; }
+  .key.k-num.has-top .key-main { font-size: 18px; left: 4px; }
 }
 @media (max-width: 380px) {
   .key { padding: 10px 2px 6px; }
   .dpad-center span { font-size: 6.5px; }
+  .key.has-top .key-top  { font-size: 12px; }
+  .key.has-top .key-main { font-size: 12px; }
+  .key.k-num.has-top .key-main { font-size: 16px; }
 }
 
 @media (max-height: 720px) {
