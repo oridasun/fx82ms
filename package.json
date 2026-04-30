@@ -1,0 +1,25 @@
+{
+  "name": "iciencia-fx82ms",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "ICIENCIA FX-82MS — réplica PWA de la calculadora científica Casio fx-82MS",
+  "scripts": {
+    "dev": "vite",
+    "build": "node scripts/gen-icons.mjs && vite build",
+    "preview": "vite preview",
+    "icons": "node scripts/gen-icons.mjs"
+  },
+  "dependencies": {
+    "mathjs": "^12.4.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vite-pwa/assets-generator": "^0.2.6",
+    "@vitejs/plugin-react": "^4.3.1",
+    "sharp": "^0.34.5",
+    "vite": "^5.4.8",
+    "vite-plugin-pwa": "^0.20.5"
+  }
+}

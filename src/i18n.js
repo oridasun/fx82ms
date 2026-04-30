@@ -1,0 +1,97 @@
+export const translations = {
+  es: {
+    appName: 'ICIENCIA FX-82MS',
+    install: 'Instalar',
+    manual: 'Manual',
+    about: 'Acerca de',
+    settings: 'Ajustes',
+    close: 'Cerrar',
+    history: 'Historial',
+    clearHistory: 'Borrar historial',
+    language: 'Idioma',
+    spanish: 'Español',
+    english: 'English',
+    version: 'Versión',
+    aboutText: 'ICIENCIA FX-82MS es una réplica funcional de la calculadora científica Casio fx-82MS, optimizada como aplicación web instalable (PWA) para uso offline.',
+    aboutBrand: 'Marca: ICIENCIA — Producto educativo independiente. Sin afiliación con CASIO Computer Co., Ltd.',
+    manualSections: {
+      basics: 'Operaciones básicas',
+      basicsBody: 'Introduce números y operadores como en una calculadora normal. Pulsa = para evaluar. Usa los paréntesis ( ) para agrupar. Los paréntesis sin cerrar se cierran automáticamente al pulsar =.',
+      svpam: 'Sistema S-V.P.A.M.',
+      svpamBody: 'La fórmula completa se muestra en la línea superior. Usa ◀ y ▶ para mover el cursor y editar caracteres antes de pulsar =. ▲/▼ navegan por el historial de cálculos previos.',
+      shiftKeys: 'SHIFT y funciones secundarias',
+      shiftKeysBody: 'Cada tecla con etiqueta naranja en la esquina superior derecha tiene una función SHIFT. Al pulsar SHIFT, las etiquetas naranjas se intercambian visualmente con las blancas: la función SHIFT pasa a la esquina inferior izquierda en grande, indicando que se ejecutará al pulsar la tecla. Resumen de SHIFT en números: 1–6 = variables estadísticas (en SD); 7=Abs, 8=Int, 9=Frac, 0=Ran#, .=Rnd (redondea).',
+      modes: 'Modo angular',
+      modesBody: 'SHIFT+(coma) o SHIFT+Ans cicla entre DEG, RAD y GRAD. El indicador D, R o G se muestra arriba del display. Para usar grados explícitos en cualquier modo, escribe el valor seguido de °: por ejemplo sin(30°).',
+      display: 'Modos de visualización (FIX / SCI / NORM)',
+      displayBody: 'Pulsa SHIFT+MODE para abrir el menú "Fix Sci Norm". Pulsa 1, 2 o 3 para elegir; FIX y SCI piden a continuación el número de dígitos (0–9). NORM (3) restaura la visualización completa.',
+      percent: 'Porcentaje (%)',
+      percentBody: 'El porcentaje funciona estilo Casio: 200+10% = 220 (suma del 10%), 50−20% = 40 (descuento), 200×5% = 10 (5% de 200), 100÷25% = 400.',
+      sciNotation: 'Notación científica e ingeniería',
+      sciNotationBody: 'EXP inserta ×10^( para introducir un exponente: 1.5 EXP 3 = 1500. La tecla ENG convierte el resultado a notación de ingeniería con exponente múltiplo de 3; cada nuevo ENG sube +3.',
+      quadratic: 'Ecuación de segundo grado (EQN)',
+      quadraticBody: 'SHIFT+ENG abre el resolutor de ax²+bx+c=0. Introduce el valor de a y pulsa =, después b y =, después c y =. La calculadora muestra las dos raíces (x₁, x₂), o "x=…±…i" si el discriminante es negativo. Para coeficientes negativos usa la tecla (-).',
+      dms: 'Grados-minutos-segundos (°’”)',
+      dmsBody: 'Cada pulsación de °’” cicla entre °, ’ y ”. Introduce 12°30’45” = y obtienes 12,5125 (decimal). SHIFT+°’” convierte un resultado decimal a su forma sexagesimal: 31,75 → 31°45’0”.',
+      memory: 'Memoria',
+      memoryBody: 'M+ suma a la memoria, SHIFT+M+ (M−) resta. RCL inserta el valor M en la fórmula. SHIFT+RCL (STO) almacena el resultado actual en M. El indicador M aparece cuando la memoria es no nula.',
+      stats: 'Estadística (modo SD)',
+      statsBody: 'Pulsa MODE para alternar entre COMP y SD. En SD, cada número seguido de DT (M+) añade un dato. La barra inferior muestra n, x̄ y σn en tiempo real. Para usar las variables en una fórmula: SHIFT+1=x̄, SHIFT+2=σn, SHIFT+3=σn-1, SHIFT+4=n, SHIFT+5=Σx, SHIFT+6=Σx². Ejemplo: x̄×n = suma total.',
+      decimal: 'Separador decimal',
+      decimalBody: 'En español el separador decimal es la coma (0,5); en inglés es el punto (0.5). Cambia el idioma desde Ajustes. Al teclear, el botón con etiqueta «,» (o «.» en inglés) inserta el separador decimal.',
+      keyboard: 'Teclado físico',
+      keyboardBody: 'Números, operadores +, -, *, /, paréntesis y Enter (=) funcionan directamente. Backspace = DEL, Escape = AC, flechas = movimiento del cursor.'
+    }
+  },
+  en: {
+    appName: 'ICIENCIA FX-82MS',
+    install: 'Install',
+    manual: 'Manual',
+    about: 'About',
+    settings: 'Settings',
+    close: 'Close',
+    history: 'History',
+    clearHistory: 'Clear history',
+    language: 'Language',
+    spanish: 'Español',
+    english: 'English',
+    version: 'Version',
+    aboutText: 'ICIENCIA FX-82MS is a functional replica of the Casio fx-82MS scientific calculator, packaged as an installable, offline-capable PWA.',
+    aboutBrand: 'Brand: ICIENCIA — Independent educational product. Not affiliated with CASIO Computer Co., Ltd.',
+    manualSections: {
+      basics: 'Basic operations',
+      basicsBody: 'Type numbers and operators like a regular calculator. Press = to evaluate. Use parentheses ( ) for grouping. Unclosed parentheses are auto-closed when you press =.',
+      svpam: 'S-V.P.A.M. system',
+      svpamBody: 'The full expression appears on the top line. Use ◀ and ▶ to move the cursor and edit specific characters before pressing =. ▲/▼ browse the previous calculations.',
+      shiftKeys: 'SHIFT and secondary functions',
+      shiftKeysBody: 'Each key with an orange label in the top-right corner has a SHIFT function. When you press SHIFT, orange and white labels swap visually: the SHIFT function moves to the bottom-left corner in large size, signalling it will trigger when the key is pressed. Number-key SHIFT summary: 1–6 = statistics variables (in SD); 7=Abs, 8=Int, 9=Frac, 0=Ran#, .=Rnd (round).',
+      modes: 'Angle mode',
+      modesBody: 'SHIFT+(comma) or SHIFT+Ans cycles DEG, RAD, GRAD. The D, R or G indicator shows above the display. To use degrees explicitly in any mode, type a value followed by °: e.g. sin(30°).',
+      display: 'Display modes (FIX / SCI / NORM)',
+      displayBody: 'Press SHIFT+MODE to open the "Fix Sci Norm" menu. Press 1, 2 or 3 to pick; FIX and SCI then ask for the digit count (0–9). NORM (3) restores full display.',
+      percent: 'Percentage (%)',
+      percentBody: 'Percentage uses Casio semantics: 200+10% = 220 (10% surcharge), 50−20% = 40 (discount), 200×5% = 10 (5% of 200), 100÷25% = 400.',
+      sciNotation: 'Scientific & engineering notation',
+      sciNotationBody: 'EXP inserts ×10^( to enter an exponent: 1.5 EXP 3 = 1500. The ENG key converts the result to engineering notation (exponent that is a multiple of 3); each ENG raises by +3.',
+      quadratic: 'Quadratic equation (EQN)',
+      quadraticBody: 'SHIFT+ENG opens the ax²+bx+c=0 solver. Enter a and press =, then b and =, then c and =. The calculator shows both roots (x₁, x₂), or "x=…±…i" when the discriminant is negative. Use the (-) key for negative coefficients.',
+      dms: 'Degrees-minutes-seconds (°’”)',
+      dmsBody: 'Each press of °’” cycles °, ’, ”. Type 12°30’45” = to get 12.5125 (decimal). SHIFT+°’” converts a decimal result to sexagesimal: 31.75 → 31°45’0”.',
+      memory: 'Memory',
+      memoryBody: 'M+ adds to memory, SHIFT+M+ (M−) subtracts. RCL inserts the M value into the formula. SHIFT+RCL (STO) stores the current result into M. The M indicator appears when memory is non-zero.',
+      stats: 'Statistics (SD mode)',
+      statsBody: 'Press MODE to toggle COMP and SD. In SD, a number followed by DT (M+) adds a sample. The bottom bar shows n, x̄ and σn live. To use variables in a formula: SHIFT+1=x̄, SHIFT+2=σn, SHIFT+3=σn-1, SHIFT+4=n, SHIFT+5=Σx, SHIFT+6=Σx². Example: x̄×n = total sum.',
+      decimal: 'Decimal separator',
+      decimalBody: 'In Spanish the decimal separator is the comma (0,5); in English it is the dot (0.5). Switch language from Settings. The keypad button labelled "," (or "." in English) inserts the decimal separator.',
+      keyboard: 'Physical keyboard',
+      keyboardBody: 'Digits, operators +, -, *, /, parentheses and Enter (=) work directly. Backspace = DEL, Escape = AC, arrow keys move the cursor.'
+    }
+  }
+};
+
+export const t = (lang, key) => {
+  const parts = key.split('.');
+  let node = translations[lang] || translations.es;
+  for (const p of parts) node = node?.[p];
+  return node ?? key;
+};

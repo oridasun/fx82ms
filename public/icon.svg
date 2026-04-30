@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Cuerpo de la calculadora -->
+  <rect width="512" height="512" rx="96" fill="#1f2937"/>
+  <rect x="16" y="16" width="480" height="480" rx="86" fill="none" stroke="#0a0c0f" stroke-width="2"/>
+
+  <!-- Marca superior -->
+  <text x="256" y="86" text-anchor="middle" font-family="'Orbitron','Trebuchet MS',monospace" font-size="36" fill="#f4f5f7" font-weight="700" letter-spacing="6">ICIENCIA</text>
+
+  <!-- Pantalla LCD -->
+  <rect x="48" y="112" width="416" height="160" rx="14" fill="#c8d4b6" stroke="#2a2e34" stroke-width="3"/>
+  <text x="256" y="232" text-anchor="middle" font-family="'Orbitron','Trebuchet MS',monospace" font-size="116" fill="#0f1115" font-weight="700">fx</text>
+  <text x="448" y="252" text-anchor="end" font-family="'Orbitron',monospace" font-size="22" fill="#0f1115" font-weight="700" opacity="0.75">82MS</text>
+
+  <!-- Filas de teclas -->
+  <g>
+    <rect x="48"  y="296" width="92" height="48" rx="10" fill="#2c2f35"/>
+    <rect x="152" y="296" width="92" height="48" rx="10" fill="#2c2f35"/>
+    <rect x="256" y="296" width="92" height="48" rx="10" fill="#2c2f35"/>
+    <rect x="360" y="296" width="48" height="48" rx="10" fill="#3a3f47"/>
+    <rect x="416" y="296" width="48" height="48" rx="10" fill="#b91c1c"/>
+
+    <rect x="48"  y="356" width="92" height="48" rx="10" fill="#2c2f35"/>
+    <rect x="152" y="356" width="92" height="48" rx="10" fill="#2c2f35"/>
+    <rect x="256" y="356" width="92" height="48" rx="10" fill="#2c2f35"/>
+    <rect x="360" y="356" width="48" height="48" rx="10" fill="#2f3641"/>
+    <rect x="416" y="356" width="48" height="48" rx="10" fill="#f59e0b"/>
+
+    <rect x="48"  y="416" width="196" height="48" rx="10" fill="#2c2f35"/>
+    <rect x="256" y="416" width="92" height="48" rx="10" fill="#2c2f35"/>
+    <rect x="360" y="416" width="104" height="48" rx="10" fill="#1d4ed8"/>
+  </g>
+</svg>

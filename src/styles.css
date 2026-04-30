@@ -1,0 +1,520 @@
+/* ICIENCIA FX-82MS — flat design */
+* { box-sizing: border-box; }
+
+:root {
+  --bg: #0f1115;
+  --shell: #2b2f36;
+  --shell-dark: #1f2329;
+  --shell-edge: #14171b;
+  --plate: #3a4047;
+  --display-bg: #c8d4b6;
+  --display-shadow: #92a07d;
+  --display-text: #1a1a1a;
+  --key-num: #2c2f35;
+  --key-num-text: #f4f5f7;
+  --key-fn: #3a3f47;
+  --key-fn-text: #f0f2f5;
+  --key-op: #3a3f47;
+  --key-eq: #1d4ed8;
+  --key-eq-text: #fff;
+  --key-ac: #b91c1c;
+  --key-ac-text: #fff;
+  --shift-orange: #f59e0b;
+  --alpha-red: #ef4444;
+  --shift-yellow: #fbbf24;
+  --label-top: #f59e0b;
+  --label-blue: #60a5fa;
+  --line: #44494f;
+}
+
+html, body, #root { height: 100%; margin: 0; }
+body {
+  background: radial-gradient(ellipse at top, #1b1f25 0%, #0a0c10 60%, #050608 100%);
+  color: #e5e7eb;
+  font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  overflow: hidden;
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(env(safe-area-inset-top, 0), 12px) 12px max(env(safe-area-inset-bottom, 0), 12px);
+}
+
+.calc-shell {
+  width: min(92vw, 460px);
+  max-height: 96vh;
+  background: linear-gradient(180deg, var(--shell) 0%, var(--shell-dark) 100%);
+  border-radius: 22px;
+  border: 1px solid var(--shell-edge);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.55), inset 0 1px 0 rgba(255,255,255,0.06);
+  padding: 16px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 4px 0;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.brand-name {
+  font-family: 'Orbitron', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.18em;
+  color: #f4f5f7;
+}
+.brand-model {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: #9ca3af;
+}
+
+.header-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  appearance: none;
+  border: 1px solid #4b5057;
+  background: #232831;
+  color: #e5e7eb;
+  border-radius: 999px;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background .15s, transform .05s;
+}
+.chip:hover { background: #2b3340; }
+.chip:active { transform: translateY(1px); }
+
+/* Display */
+.display {
+  background: var(--display-bg);
+  color: var(--display-text);
+  border-radius: 8px;
+  border: 2px solid #2a2e34;
+  padding: 8px 12px 6px;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.25), inset 0 -1px 0 var(--display-shadow);
+  font-family: 'Orbitron', 'JetBrains Mono', 'Consolas', monospace;
+}
+
+.display-indicators {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(26,26,26,0.25);
+  height: 14px;
+}
+.display-indicators .on { color: var(--display-text); }
+.display-indicators .spacer { flex: 1; }
+.display-indicators .mode-flag { color: var(--display-text); font-weight: 700; }
+
+.display-line {
+  font-size: 18px;
+  min-height: 24px;
+  text-align: right;
+  word-break: break-all;
+  white-space: pre-wrap;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+.display-line.formula {
+  font-size: 14px;
+  color: rgba(26,26,26,0.85);
+  min-height: 20px;
+}
+.display-line.result {
+  font-size: 26px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+.display-line.result.error { color: #b91c1c; font-size: 16px; }
+.display-line.menu-prompt { text-align: left; font-weight: 700; letter-spacing: 0.06em; }
+.quad-banner {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  color: rgba(26,26,26,0.85);
+  border-bottom: 1px dashed rgba(26,26,26,0.35);
+  padding-bottom: 2px;
+  margin-bottom: 2px;
+  font-weight: 700;
+}
+
+.cursor {
+  display: inline-block;
+  min-width: 6px;
+}
+.cursor-block {
+  background: rgba(26,26,26,0.7);
+  color: var(--display-bg);
+  animation: blink 1s steps(2) infinite;
+}
+@keyframes blink {
+  50% { background: transparent; color: var(--display-text); }
+}
+
+.sd-bar {
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  border-top: 1px dashed rgba(26,26,26,0.35);
+  margin-top: 4px;
+  padding-top: 4px;
+  color: rgba(26,26,26,0.85);
+}
+
+/* Brand stripe between display & keypad */
+.brand-stripe {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  color: #9ca3af;
+  padding: 0 4px;
+}
+.stripe-logo {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 700;
+  color: #d1d5db;
+  letter-spacing: 0.22em;
+}
+
+/* Keypad */
+.keypad {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 8px;
+  background: var(--plate);
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), inset 0 -2px 8px rgba(0,0,0,0.3);
+}
+.keypad-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 7px;
+}
+
+/* Top controls: SHIFT/ALPHA — DPAD — MODE/ON */
+.top-controls {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 4px 2px 6px;
+}
+.top-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7px;
+}
+/* En el lado derecho, MODE/SETUP es más ancha que ON: las etiquetas
+   "MODE" y "SETUP" son largas y no caben en 50 px. */
+.top-side.top-right {
+  grid-template-columns: 1.6fr 1fr;
+}
+
+.dpad {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  margin: 0 auto;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 28%, #5a626d 0%, #353a42 55%, #1f242a 100%);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  box-shadow:
+    inset 0 2px 8px rgba(0,0,0,0.6),
+    inset 0 -2px 4px rgba(255,255,255,0.05),
+    0 2px 0 #0a0c0f,
+    0 6px 14px rgba(0,0,0,0.45);
+  border: 1px solid #14171b;
+}
+
+.dpad-key {
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: #f3f4f6;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .12s, transform .04s, color .12s;
+  border-radius: 6px;
+  margin: 2px;
+}
+.dpad-key:hover  { background: rgba(255,255,255,0.08); }
+.dpad-key:active,
+.dpad-key.pressed {
+  background: rgba(96, 165, 250, 0.25);
+  color: #93c5fd;
+  transform: scale(0.94);
+}
+.dpad-up    { grid-column: 2; grid-row: 1; }
+.dpad-left  { grid-column: 1; grid-row: 2; }
+.dpad-right { grid-column: 3; grid-row: 2; }
+.dpad-down  { grid-column: 2; grid-row: 3; }
+
+.dpad-center {
+  grid-column: 2;
+  grid-row: 2;
+  width: 38px;
+  height: 38px;
+  margin: auto;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #2c3138 0%, #14171b 100%);
+  border: 1px solid #0a0c0f;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.06), inset 0 -1px 2px rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dpad-center span {
+  font-family: 'Inter', sans-serif;
+  font-size: 7.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #93c5fd;
+}
+
+.key {
+  position: relative;
+  appearance: none;
+  border: 1px solid #14171b;
+  border-radius: 7px;
+  padding: 14px 4px 8px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 38px;
+  transition: transform .04s ease-out, filter .15s;
+  user-select: none;
+  background: var(--key-fn);
+  color: var(--key-fn-text);
+  box-shadow: 0 2px 0 #0a0c0f, inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.key:active, .key.pressed {
+  transform: translateY(2px);
+  box-shadow: 0 0 0 #0a0c0f, inset 0 1px 0 rgba(255,255,255,0.05);
+  filter: brightness(1.15);
+}
+
+.key-top {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--label-top);
+  letter-spacing: 0;
+  font-weight: 700;
+  transition: top .18s ease, right .18s ease, bottom .18s ease, left .18s ease, color .18s ease;
+}
+.key-main {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: color .18s ease;
+}
+/* Teclas con función secundaria: layout diagonal — top arriba-derecha,
+   main abajo-izquierda, mismo tamaño 16 px, sin solapamiento. */
+.key.has-top .key-main {
+  position: absolute;
+  bottom: 6px;
+  left: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+/* (SHIFT-activo: las reglas se definen al final del archivo para que
+    venzan por orden además de por especificidad sobre las media queries.) */
+
+.k-num { background: var(--key-num); color: var(--key-num-text); font-weight: 700; }
+.k-num .key-main { font-size: 20px; }
+/* Cuando un número tiene función SHIFT (1–9, 0, .): el dígito sigue grande,
+   la etiqueta SHIFT un poco menor para mantener jerarquía. */
+.key.k-num.has-top .key-main { font-size: 20px; }
+.key.k-num.has-top .key-top  { font-size: 14px; }
+.k-op  { background: #2f3641; color: #fff; }
+.k-op  .key-main { font-size: 18px; }
+.k-fn  { background: var(--key-fn); }
+.k-shift { background: #c2410c; color: #fff; }
+.k-alpha { background: #ef4444; color: #fff; }
+.k-mode  { background: #1f2937; }
+.k-on    { background: #b91c1c; color: #fff; }
+.k-nav   { background: #475569; color: #fff; }
+.k-edit  { background: #4b5563; color: #fff; }
+.k-ac    { background: var(--key-ac); color: var(--key-ac-text); }
+.k-eq    { background: var(--key-eq); color: var(--key-eq-text); }
+.k-eq .key-main { font-size: 22px; font-weight: 800; }
+
+/* Side panel */
+.panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: min(420px, 92vw);
+  background: #111418;
+  border-left: 1px solid #2a2f36;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -16px 0 40px rgba(0,0,0,0.5);
+  animation: slidein .2s ease-out;
+}
+@keyframes slidein {
+  from { transform: translateX(20px); opacity: 0; }
+  to   { transform: translateX(0);   opacity: 1; }
+}
+.panel-backdrop {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 19;
+}
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #2a2f36;
+}
+.panel-header h2 { margin: 0; font-size: 16px; letter-spacing: 0.1em; text-transform: uppercase; color: #e5e7eb; }
+.panel-header .close {
+  background: transparent; border: none; color: #9ca3af; font-size: 18px; cursor: pointer; padding: 6px 8px; border-radius: 6px;
+}
+.panel-header .close:hover { color: #fff; background: #1f242c; }
+
+.panel-content {
+  padding: 14px 18px 24px;
+  overflow-y: auto;
+}
+.panel-content section { margin-bottom: 18px; }
+.panel-content h3 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #93c5fd;
+}
+.panel-content p { margin: 0 0 6px; line-height: 1.5; color: #d1d5db; font-size: 14px; }
+.muted { color: #9ca3af !important; font-size: 12px; }
+
+/* Settings */
+.lang-toggle { display: flex; gap: 8px; }
+.lang-toggle button {
+  flex: 1; padding: 8px 10px; border-radius: 8px;
+  background: #1f242c; border: 1px solid #2a2f36; color: #e5e7eb; cursor: pointer;
+}
+.lang-toggle button.on { background: #1d4ed8; border-color: #2563eb; color: #fff; }
+
+.history-list { list-style: none; margin: 0; padding: 0; max-height: 40vh; overflow-y: auto; }
+.history-list li { margin-bottom: 4px; }
+.history-item {
+  width: 100%;
+  text-align: left;
+  background: #1a1f26;
+  border: 1px solid #262c34;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  color: #e5e7eb;
+  font-family: 'Orbitron', monospace;
+  font-size: 13px;
+}
+.history-item:hover { background: #232a33; }
+.hist-formula { color: #cbd5e1; }
+.hist-result  { color: #93c5fd; margin-left: 6px; }
+
+button.danger {
+  margin-top: 8px;
+  background: #7f1d1d; color: #fff; border: 1px solid #991b1b;
+  padding: 8px 12px; border-radius: 8px; cursor: pointer;
+}
+button.danger:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* About */
+.about-logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: #f4f5f7;
+  margin-bottom: 4px;
+}
+.about-version { color: #93c5fd; font-size: 13px; margin: 0 0 10px; }
+
+/* Responsive */
+@media (max-height: 760px) {
+  .key { padding: 10px 4px 6px; min-height: 32px; }
+  .key-main { font-size: 13px; }
+  .k-num .key-main { font-size: 16px; }
+  .display-line.result { font-size: 22px; }
+}
+
+@media (max-width: 380px) {
+  .calc-shell { padding: 12px 10px 14px; border-radius: 16px; }
+  .key { padding: 10px 2px 6px; }
+  .key-top { font-size: 11px; top: 3px; right: 4px; }
+  .key-main { font-size: 12px; }
+  .key.has-top .key-main { font-size: 11px; bottom: 4px; left: 5px; }
+  .dpad { width: 96px; height: 96px; }
+  .dpad-center { width: 32px; height: 32px; }
+  .dpad-center span { font-size: 6.5px; }
+}
+
+@media (max-height: 720px) {
+  .dpad { width: 96px; height: 96px; }
+  .dpad-center { width: 32px; height: 32px; }
+  .top-controls { padding: 2px 0; }
+}
+
+/* SHIFT activo: en cada tecla con función secundaria, intercambiamos
+   visualmente la función principal (arriba pequeña, naranja) con la
+   función shift (abajo grande, blanca). Definido al final para que el
+   orden de cascada refuerce la mayor especificidad. */
+.keypad.shift-active .key.has-top {
+  border-color: rgba(245, 158, 11, 0.55);
+  box-shadow: 0 2px 0 #0a0c0f, inset 0 0 0 1px rgba(245, 158, 11, 0.22), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+/* SHIFT activo: las teclas con función secundaria intercambian posición
+   en diagonal (top → abajo-izquierda, main → arriba-derecha) y colores
+   (top pasa a blanco, main pasa a naranja). Sin cambios de tamaño. */
+#root .keypad.shift-active .key.has-top .key-top {
+  top: auto !important;
+  right: auto !important;
+  bottom: 6px !important;
+  left: 8px !important;
+  color: var(--key-fn-text) !important;
+}
+#root .keypad.shift-active .key.has-top .key-main {
+  bottom: auto !important;
+  left: auto !important;
+  top: 4px !important;
+  right: 6px !important;
+  color: var(--label-top) !important;
+}
+/* Y la tecla = / operadores no llevan etiqueta superior, así que no se ven afectados. */
