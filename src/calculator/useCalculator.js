@@ -314,12 +314,19 @@ function handleKey(state, key, history, pushHistory) {
   // Potencias / raíces
   if (key === 'SQRT') return shifted ? ins('∛(') : ins('√(');
   if (key === 'POW2') return shifted ? ins('³') : ins('²');
-  if (key === 'POW')  return ins('^');
+  if (key === 'POW')  {
+    // SHIFT+POW = EQN: resolutor de ecuación cuadrática.
+    if (shifted) {
+      return clearShifts({ ...s, pendingMenu: 'quadA', quadCoeffs: {}, formula: '', cursor: 0, showResult: false });
+    }
+    return ins('^');
+  }
   if (key === 'INV')  return shifted ? ins('!') : ins('⁻¹');
   if (key === 'NCR')  return shifted ? ins(' permutations(') : ins(' combinations(');
 
-  // π y EXP (×10^(...) estilo Casio)
-  if (key === 'EXP')  return shifted ? ins('π') : ins('×10^(');
+  // π y ×10^ (sin paréntesis abierto: la precedencia de ^ ya hace lo correcto;
+  // así un (-) negativo a continuación queda como ×10^(-)5 en lugar de ×10^((-)5).
+  if (key === 'EXP')  return shifted ? ins('π') : ins('×10^');
 
   // Memoria
   if (key === 'RCL') {
@@ -334,9 +341,12 @@ function handleKey(state, key, history, pushHistory) {
   // ENG / DMS / Ans
   if (key === 'ANS')  return ins('Ans');
   if (key === 'DMS') {
-    // SHIFT+DMS: convertir resultado decimal a D°M'S".
-    if (shifted && s.showResult && typeof s.result === 'number' && Number.isFinite(s.result)) {
-      return clearShifts({ ...s, resultText: toDMS(s.result) });
+    // SHIFT+DMS: convertir resultado decimal a D°M'S". Solo si hay resultado.
+    if (shifted) {
+      if (s.showResult && typeof s.result === 'number' && Number.isFinite(s.result)) {
+        return clearShifts({ ...s, resultText: toDMS(s.result) });
+      }
+      return clearShifts(s); // sin resultado → no hacer nada (antes insertaba ° huérfano)
     }
     // Pulsación normal: ciclar °, ', " según el último delimitador en el grupo actual.
     const before = s.formula.slice(0, s.cursor);
@@ -352,13 +362,11 @@ function handleKey(state, key, history, pushHistory) {
     return ins(next);
   }
   if (key === 'ENG') {
-    // SHIFT+ENG → resolver ecuación cuadrática ax²+bx+c=0.
-    if (shifted) {
-      return clearShifts({ ...s, pendingMenu: 'quadA', quadCoeffs: {}, formula: '', cursor: 0, showResult: false });
-    }
+    // ENG / SHIFT+ENG (←ENG) — solo opera sobre un resultado calculado.
     if (!s.showResult || typeof s.result !== 'number' || !Number.isFinite(s.result)) {
       return clearShifts(s);
     }
+    // Primer ENG → formato eng base (offset = 0). Siguientes ±3 (SHIFT invierte).
     const newOffset = (s.engOffset === null || s.engOffset === undefined)
       ? 0
       : s.engOffset + (shifted ? -3 : 3);

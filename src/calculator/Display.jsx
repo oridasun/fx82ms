@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 function renderFormulaWithCursor(formula, cursor, blinking) {
   if (formula.length === 0) {
@@ -18,6 +18,23 @@ function renderFormulaWithCursor(formula, cursor, blinking) {
 
 export default function Display({ state, sdStats, lang }) {
   const { formula, cursor, resultText, shift, alpha, angleMode, displayMode, M, mode, hyp, error, pendingMenu } = state;
+  const formulaRef = useRef(null);
+
+  // Auto-scroll horizontal: mantener el cursor a la vista cuando la
+  // fórmula es más larga que la pantalla.
+  useEffect(() => {
+    const root = formulaRef.current;
+    if (!root) return;
+    const cursorEl = root.querySelector('.cursor');
+    if (!cursorEl) return;
+    const cRect = cursorEl.getBoundingClientRect();
+    const rRect = root.getBoundingClientRect();
+    if (cRect.right > rRect.right - 4) {
+      root.scrollLeft += cRect.right - rRect.right + 24;
+    } else if (cRect.left < rRect.left + 4) {
+      root.scrollLeft -= rRect.left - cRect.left + 24;
+    }
+  }, [formula, cursor]);
 
   // Localización del separador decimal (solo visualización; la fórmula interna usa '.').
   const decimalChar = lang === 'es' ? ',' : '.';
@@ -63,7 +80,7 @@ export default function Display({ state, sdStats, lang }) {
           {quadBanner && (
             <div className="quad-banner" aria-live="polite">{quadBanner}</div>
           )}
-          <div className="display-line formula" aria-live="polite">
+          <div className="display-line formula" aria-live="polite" ref={formulaRef}>
             {renderFormulaWithCursor(formulaText, cursor, true)}
           </div>
           <div className={`display-line result ${error ? 'error' : ''}`} aria-live="polite">

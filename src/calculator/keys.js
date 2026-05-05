@@ -34,7 +34,7 @@ export const KEYS = [
   [
     { id: 'SQRT', top: '∛',  main: '√',   className: 'k-fn' },
     { id: 'POW2', top: 'x³', main: 'x²',  className: 'k-fn' },
-    { id: 'POW',  top: 'ˣ√', main: '^',   className: 'k-fn' },
+    { id: 'POW',  top: 'EQN', main: '^',  className: 'k-fn' },
     { id: 'NEG',              main: '(-)', className: 'k-fn' },
     { id: 'DMS',  top: '←',  main: '°’”', className: 'k-fn' }
   ],
@@ -51,7 +51,7 @@ export const KEYS = [
     { id: 'LPAREN', main: '(', className: 'k-fn' },
     { id: 'RPAREN', main: ')', className: 'k-fn' },
     { id: 'COMMA',  top: 'DRG▶', main: ';',   className: 'k-fn' },
-    { id: 'ENG',    top: 'EQN',  main: 'ENG', className: 'k-fn' },
+    { id: 'ENG',    top: '←',    main: 'ENG', className: 'k-fn' },
     { id: 'ANS',                 main: 'Ans', className: 'k-fn' }
   ],
   // Números fila 7-9, DEL, AC
@@ -80,7 +80,7 @@ export const KEYS = [
   [
     { id: 'D0',  top: 'Ran#', main: '0', className: 'k-num' },
     { id: 'DOT', top: 'Rnd',  main: '.', className: 'k-num' },
-    { id: 'EXP', top: 'π',    main: 'EXP', className: 'k-fn' },
+    { id: 'EXP', top: 'π',    main: '×10ˣ', className: 'k-fn' },
     { id: 'EQ',  main: '=',  className: 'k-eq', span: 2 }
   ]
 ];

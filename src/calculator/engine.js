@@ -81,7 +81,7 @@ function applyPercentage(expr) {
 // Convierte D°M'S" a decimal (grados-minutos-segundos sexagesimales).
 // Acepta minutos/segundos vacíos: 30°15'" o 30°' equivalen a 30°15'0" / 30°.
 function dmsToDecimal(expr) {
-  return expr.replace(
+  let r = expr.replace(
     /(-?\d+(?:\.\d+)?)°(?:(\d+(?:\.\d+)?)?')?(?:(\d+(?:\.\d+)?)?")?/g,
     (full, d, m, sec) => {
       const D = parseFloat(d);
@@ -92,6 +92,10 @@ function dmsToDecimal(expr) {
       return `(${dec})`;
     }
   );
+  // Limpia °, ', " sueltos (insertados por error sin dígito previo)
+  // para evitar Syntax ERROR al evaluar.
+  r = r.replace(/[°'"]/g, '');
+  return r;
 }
 
 // Resuelve ax²+bx+c=0. Devuelve { primary, label }. label es la cadena visible.

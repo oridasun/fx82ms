@@ -134,11 +134,22 @@ body {
   line-height: 1.2;
   letter-spacing: 0.02em;
 }
+/* Fórmula en una sola línea con scroll horizontal — el cursor siempre
+   visible (auto-scroll desde Display.jsx). */
 .display-line.formula {
   font-size: 24px;
   color: rgba(26,26,26,0.92);
   min-height: 32px;
+  white-space: nowrap;
+  word-break: keep-all;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(26,26,26,0.4) transparent;
 }
+.display-line.formula::-webkit-scrollbar { height: 4px; }
+.display-line.formula::-webkit-scrollbar-thumb { background: rgba(26,26,26,0.4); border-radius: 2px; }
+.display-line.formula::-webkit-scrollbar-track { background: transparent; }
 .display-line.result {
   font-size: 24px;
   font-weight: 700;
