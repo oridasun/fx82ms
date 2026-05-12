@@ -36,6 +36,10 @@ function buildScope({ angleMode, ans, M, sdStats }) {
     asinh: (x) => Math.asinh(x),
     acosh: (x) => Math.acosh(x),
     atanh: (x) => Math.atanh(x),
+    // Logaritmos estilo Casio: log = base 10, ln = natural.
+    // (mathjs por defecto define log() como natural — lo reescribimos.)
+    log: (x) => Math.log10(x),
+    ln:  (x) => Math.log(x),
     // Parte fraccionaria (mathjs no la trae directa).
     frac: (x) => x - Math.floor(x)
   };
