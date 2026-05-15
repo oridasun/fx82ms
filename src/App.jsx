@@ -70,10 +70,6 @@ export default function App() {
     <div className={`app ${layout === 'landscape' ? 'landscape' : 'portrait'}`}>
       <div className="calc-shell" role="application" aria-label="ICIENCIA FX-82MS">
         <header className="calc-header">
-          <div className="brand">
-            <span className="brand-name">ICIENCIA</span>
-            <span className="brand-model">FX-82MS</span>
-          </div>
           <div className="header-actions">
             {installPrompt && (
               <button className="chip" onClick={triggerInstall} title={T.install}>{T.install}</button>

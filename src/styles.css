@@ -71,10 +71,11 @@ body {
 .calc-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  justify-content: center;
+  gap: 6px;
   padding: 2px 4px 0;
 }
+.header-actions { flex-wrap: nowrap; }
 
 .brand {
   display: flex;
@@ -557,29 +558,32 @@ button.danger:disabled { opacity: 0.5; cursor: not-allowed; }
   padding: 0;
 }
 .app.landscape .calc-shell {
-  width: 100vw;
+  width: min(100vw, 880px);   /* recortada: deja fondo a los lados */
   max-width: 100vw;
   height: 100vh;
   max-height: 100vh;
   border-radius: 0;
   padding: 8px 12px 10px;
   display: grid;
-  grid-template-columns: minmax(280px, 40%) 1fr;
-  grid-template-rows: auto auto 1fr;
+  grid-template-columns: minmax(280px, 38%) 1fr;
+  /* 5 filas: dos 1fr (espacio arriba/abajo) que centran verticalmente los
+     bloques apilados, y la columna derecha (rows) ocupa todo el alto. */
+  grid-template-rows: 1fr auto auto auto 1fr;
   grid-template-areas:
+    ".       rows"
     "header  rows"
     "display rows"
-    "topctl  rows";
-  gap: 8px 14px;
+    "topctl  rows"
+    ".       rows";
+  gap: 6px 14px;
 }
 .app.landscape .calc-shell > .calc-header        { grid-area: header; }
-.app.landscape .calc-shell > .calc-display-stack { grid-area: display; align-self: start; }
+.app.landscape .calc-shell > .calc-display-stack { grid-area: display; }
 /* .keypad usa display: contents en apaisado para que sus hijos
    (.top-controls y .keypad-rows) se coloquen directamente en el grid. */
 .app.landscape .calc-shell > .keypad             { display: contents; }
-.app.landscape .top-controls                     { grid-area: topctl; align-self: end; }
+.app.landscape .top-controls                     { grid-area: topctl; }
 .app.landscape .keypad-rows                      { grid-area: rows; align-self: stretch; }
-/* En apaisado el teclado puede ser más alto: aprovecha el alto disponible. */
 .app.landscape .key                              { min-height: 38px; }
 
 /* SHIFT activo: en cada tecla con función secundaria, intercambiamos
