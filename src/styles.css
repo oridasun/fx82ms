@@ -56,7 +56,17 @@ body {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  overflow: hidden;     /* nunca scroll dentro del shell */
 }
+.calc-display-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-shrink: 0;
+}
+/* Keypad se adapta al espacio sobrante; permite shrink para que las teclas
+   se recompongan en pantallas bajas sin generar scroll. */
+.keypad { min-height: 0; flex: 1 1 auto; }
 
 .calc-header {
   display: flex;
@@ -99,6 +109,7 @@ body {
 }
 .chip:hover { background: #2b3340; }
 .chip:active { transform: translateY(1px); }
+.chip-rotate { font-size: 15px; line-height: 1; padding: 4px 8px; }
 
 /* Display */
 .display {
@@ -506,6 +517,7 @@ button.danger:disabled { opacity: 0.5; cursor: not-allowed; }
   .brand-name  { font-size: 16px; }
   .brand-model { font-size: 10px; }
   .chip { padding: 4px 8px; font-size: 10px; }
+  .chip-rotate { font-size: 14px; padding: 2px 8px; }
 
   /* En móvil cada tecla central (1/5 del ancho) es estrecha; reducimos
      gaps internos y font-size para que main + top no se solapen. */
@@ -529,6 +541,39 @@ button.danger:disabled { opacity: 0.5; cursor: not-allowed; }
   .dpad-center { width: 32px; height: 32px; }
   .top-controls { padding: 2px 0; }
 }
+
+/* Layout apaisado: dos columnas (cabecera + display | teclado). */
+.app.landscape {
+  padding: 0;
+}
+.app.landscape .calc-shell {
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  border-radius: 0;
+  padding: 8px 10px;
+  flex-direction: row;
+  gap: 10px;
+}
+.app.landscape .calc-shell > .calc-header,
+.app.landscape .calc-shell > .calc-display-stack {
+  display: none;        /* ocultamos los del layout vertical */
+}
+.app.landscape .calc-shell {
+  display: grid;
+  grid-template-columns: minmax(280px, 38%) 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header keypad"
+    "display keypad";
+}
+.app.landscape .calc-shell > .calc-header { display: flex; grid-area: header; }
+.app.landscape .calc-shell > .calc-display-stack { display: flex; grid-area: display; align-self: start; }
+.app.landscape .calc-shell > .keypad { grid-area: keypad; }
+.app.landscape .display-line.formula,
+.app.landscape .display-line.result { font-size: 22px; min-height: 28px; }
+.app.landscape .brand-stripe { display: none; }
 
 /* SHIFT activo: en cada tecla con función secundaria, intercambiamos
    visualmente la función principal (arriba pequeña, naranja) con la

@@ -8,12 +8,14 @@ import { useCalculator } from './calculator/useCalculator.js';
 import { PHYSICAL_KEY_MAP } from './calculator/keys.js';
 import { translations } from './i18n.js';
 
-const LANG_KEY = 'iciencia.lang';
+const LANG_KEY   = 'iciencia.lang';
+const LAYOUT_KEY = 'iciencia.layout';
 
 export default function App() {
   const calc = useCalculator();
   const [panel, setPanel] = useState(null); // 'manual' | 'about' | 'settings' | null
   const [lang, setLangState] = useState(() => localStorage.getItem(LANG_KEY) || 'es');
+  const [layout, setLayoutState] = useState(() => localStorage.getItem(LAYOUT_KEY) || 'portrait');
   const [installPrompt, setInstallPrompt] = useState(null);
 
   const T = translations[lang] || translations.es;
@@ -21,6 +23,11 @@ export default function App() {
   const setLang = (l) => {
     setLangState(l);
     try { localStorage.setItem(LANG_KEY, l); } catch {}
+  };
+  const toggleLayout = () => {
+    const next = layout === 'portrait' ? 'landscape' : 'portrait';
+    setLayoutState(next);
+    try { localStorage.setItem(LAYOUT_KEY, next); } catch {}
   };
 
   useEffect(() => {
@@ -60,7 +67,7 @@ export default function App() {
   };
 
   return (
-    <div className="app">
+    <div className={`app ${layout === 'landscape' ? 'landscape' : 'portrait'}`}>
       <div className="calc-shell" role="application" aria-label="ICIENCIA FX-82MS">
         <header className="calc-header">
           <div className="brand">
@@ -71,16 +78,26 @@ export default function App() {
             {installPrompt && (
               <button className="chip" onClick={triggerInstall} title={T.install}>{T.install}</button>
             )}
+            <button
+              className="chip chip-rotate"
+              onClick={toggleLayout}
+              title={T.toggleLayout}
+              aria-label={T.toggleLayout}
+            >
+              {layout === 'portrait' ? '⤧' : '⤩'}
+            </button>
             <button className="chip" onClick={() => setPanel('manual')}>{T.manual}</button>
             <button className="chip" onClick={() => setPanel('settings')}>{T.settings}</button>
             <button className="chip" onClick={() => setPanel('about')}>{T.about}</button>
           </div>
         </header>
 
-        <Display state={calc.state} sdStats={calc.sdStats} lang={lang} />
-        <div className="brand-stripe">
-          <span className="stripe-logo">ICIENCIA</span>
-          <span className="stripe-model">SCIENTIFIC CALCULATOR fx-82MS · S-V.P.A.M.</span>
+        <div className="calc-display-stack">
+          <Display state={calc.state} sdStats={calc.sdStats} lang={lang} />
+          <div className="brand-stripe">
+            <span className="stripe-logo">ICIENCIA</span>
+            <span className="stripe-model">SCIENTIFIC CALCULATOR fx-82MS · S-V.P.A.M.</span>
+          </div>
         </div>
         <Keypad onKey={calc.dispatchKey} shift={calc.state.shift} alpha={calc.state.alpha} lang={lang} />
       </div>
