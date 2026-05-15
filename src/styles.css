@@ -219,8 +219,15 @@ body {
   letter-spacing: 0.22em;
 }
 
-/* Keypad */
+/* Keypad — contenedor que agrupa top-controls y las filas.
+   El "plate" (fondo gris, padding, sombra interna) lo aplica .keypad-rows
+   para poder separar visualmente top-controls de las filas en apaisado. */
 .keypad {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.keypad-rows {
   display: flex;
   flex-direction: column;
   gap: 7px;
@@ -542,21 +549,38 @@ button.danger:disabled { opacity: 0.5; cursor: not-allowed; }
   .top-controls { padding: 2px 0; }
 }
 
-/* Modo apaisado: mismo layout vertical pero la calculadora se escala
-   para caber a lo alto. Ancho proporcional al alto disponible y el
-   resto del viewport queda como fondo a los lados. */
+/* Modo apaisado: 2 columnas.
+   - Izquierda: cabecera, display, brand-stripe y los top-controls
+     (SHIFT/ALPHA, cruceta REPLAY, SETUP/MODE).
+   - Derecha: el bloque de filas numéricas y funciones. */
 .app.landscape {
   padding: 0;
 }
 .app.landscape .calc-shell {
+  width: 100vw;
+  max-width: 100vw;
   height: 100vh;
   max-height: 100vh;
-  width: calc(100vh * 0.55);
-  max-width: 100vw;
   border-radius: 0;
-  padding: 10px 12px 12px;
-  /* Mantiene flex-direction: column de la regla base. */
+  padding: 8px 12px 10px;
+  display: grid;
+  grid-template-columns: minmax(280px, 40%) 1fr;
+  grid-template-rows: auto auto 1fr;
+  grid-template-areas:
+    "header  rows"
+    "display rows"
+    "topctl  rows";
+  gap: 8px 14px;
 }
+.app.landscape .calc-shell > .calc-header        { grid-area: header; }
+.app.landscape .calc-shell > .calc-display-stack { grid-area: display; align-self: start; }
+/* .keypad usa display: contents en apaisado para que sus hijos
+   (.top-controls y .keypad-rows) se coloquen directamente en el grid. */
+.app.landscape .calc-shell > .keypad             { display: contents; }
+.app.landscape .top-controls                     { grid-area: topctl; align-self: end; }
+.app.landscape .keypad-rows                      { grid-area: rows; align-self: stretch; }
+/* En apaisado el teclado puede ser más alto: aprovecha el alto disponible. */
+.app.landscape .key                              { min-height: 38px; }
 
 /* SHIFT activo: en cada tecla con función secundaria, intercambiamos
    visualmente la función principal (arriba pequeña, naranja) con la

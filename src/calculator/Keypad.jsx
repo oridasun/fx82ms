@@ -86,11 +86,13 @@ export default function Keypad({ onKey, shift = false, alpha = false, lang = 'es
         </div>
       </div>
 
-      {KEYS.map((row, rIdx) => (
-        <div className="keypad-row" key={rIdx}>
-          {row.map(renderKey)}
-        </div>
-      ))}
+      <div className="keypad-rows">
+        {KEYS.map((row, rIdx) => (
+          <div className="keypad-row" key={rIdx}>
+            {row.map(renderKey)}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
