@@ -542,38 +542,21 @@ button.danger:disabled { opacity: 0.5; cursor: not-allowed; }
   .top-controls { padding: 2px 0; }
 }
 
-/* Layout apaisado: dos columnas (cabecera + display | teclado). */
+/* Modo apaisado: mismo layout vertical pero la calculadora se escala
+   para caber a lo alto. Ancho proporcional al alto disponible y el
+   resto del viewport queda como fondo a los lados. */
 .app.landscape {
   padding: 0;
 }
 .app.landscape .calc-shell {
-  width: 100vw;
-  max-width: 100vw;
   height: 100vh;
   max-height: 100vh;
+  width: calc(100vh * 0.55);
+  max-width: 100vw;
   border-radius: 0;
-  padding: 8px 10px;
-  flex-direction: row;
-  gap: 10px;
+  padding: 10px 12px 12px;
+  /* Mantiene flex-direction: column de la regla base. */
 }
-.app.landscape .calc-shell > .calc-header,
-.app.landscape .calc-shell > .calc-display-stack {
-  display: none;        /* ocultamos los del layout vertical */
-}
-.app.landscape .calc-shell {
-  display: grid;
-  grid-template-columns: minmax(280px, 38%) 1fr;
-  grid-template-rows: auto 1fr;
-  grid-template-areas:
-    "header keypad"
-    "display keypad";
-}
-.app.landscape .calc-shell > .calc-header { display: flex; grid-area: header; }
-.app.landscape .calc-shell > .calc-display-stack { display: flex; grid-area: display; align-self: start; }
-.app.landscape .calc-shell > .keypad { grid-area: keypad; }
-.app.landscape .display-line.formula,
-.app.landscape .display-line.result { font-size: 22px; min-height: 28px; }
-.app.landscape .brand-stripe { display: none; }
 
 /* SHIFT activo: en cada tecla con función secundaria, intercambiamos
    visualmente la función principal (arriba pequeña, naranja) con la
